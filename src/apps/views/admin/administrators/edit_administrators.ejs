@@ -1,0 +1,78 @@
+<%- include('../layout/head.ejs',{title:"Dashboard"}) %>
+    <%- include('../layout/header.ejs',{account:"Admin"}) %>
+        <%- include('../layout/sidebar.ejs') %>
+
+            <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+                <div class="row">
+                    <ol class="breadcrumb">
+                        <li><a href="/admin/dashboard"><svg class="glyph stroked home">
+                                    <use xlink:href="#stroked-home"></use>
+                                </svg></a></li>
+                        <li><a href="/admin/users">Quản lý khách hàng</a></li>
+                        <li class="active">Sửa Admin</li>
+                    </ol>
+                </div><!--/.row-->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Sửa Admin: <%= infoAdmin.fullName %></h1>
+                    </div>
+                </div><!--/.row-->
+                <form role="form" action="/admin/administrators/updateAdministrators/<%= infoAdmin._id %>" method="post">
+
+                    <div class="container">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="full_name">Họ tên</label>
+                                <input class="form-control" placeholder="Full_name" name="full_name" type="text"
+                                    value="<%= infoAdmin.fullName %>" />
+                            </div>
+                            <div class="form-group">
+                                <label for="user">Tài khoản</label>
+                                <input class="form-control" placeholder="Tài khoản" name="account" type="text"
+                                    autofocus="" value="<%= infoAdmin.account %>" disabled />
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Mật khẩu</label>
+                                <input class="form-control" placeholder="Nhập mật khẩu" name="password" type="password"
+                                    value="<%= infoAdmin.password %>" />
+                            </div>
+                            <div class="form-group">
+                                <label for="repassword">Nhập lại mật khẩu</label>
+                                <input class="form-control" placeholder="Nhập lại mật khẩu" name="repassword"
+                                    type="password" value="<%= infoAdmin.password %>" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="sex">Giới tính</label>
+                                <select name="sex" id="" class="form-control">
+                                    <option selected> Nam</option>
+                                    <option> Nữ</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Địa chỉ</label>
+                                <input class="form-control" placeholder="Nhập địa chỉ" name="address" type="text"
+                                    value="<%= infoAdmin.address %>" />
+                            </div>
+                            <div class="form-group">
+                                <label for="role">Số điện thoại</label>
+                                <input class="form-control" placeholder="Nhập số điện thoại" name="phoneNumber"
+                                    type="text" value="<%= infoAdmin.phoneNumber %>" />
+                            </div>
+                            <div class="form-group">
+                                <label for="role">Chức vụ</label>
+                                <input class="form-control" placeholder="Role" name="role" type="text"
+                                    value="<%= infoAdmin.role %>" />
+                            </div>
+                            <button type="submit" class="btn btn-primary">Edit</button>
+                            <a name="" id="" class="btn btn-primary" href="/admin/administrators" role="button">Quay lại</a>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+
+<%- include('../layout/footer.ejs') %>

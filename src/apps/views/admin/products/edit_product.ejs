@@ -1,0 +1,106 @@
+<%- include('../layout/head.ejs',{title:"Edit product"}) %>
+<%- include('../layout/header.ejs',{account:"Admin"}) %>
+<%- include('../layout/sidebar.ejs') %>
+
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="/admin/dashboard"><svg class="glyph stroked home">
+                        <use xlink:href="#stroked-home"></use>
+                    </svg></a></li>
+            <li> <a href="/admin/products">Quản lý sản phẩm</a> </li>        
+            <li class="active"> Sửa sản phẩm </li>
+            <li class="active"><%= editproduct.name %></li>
+        </ol>
+    </div><!--/.row-->
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Sửa sản phẩm : <%= editproduct.name %></h1>
+        </div>
+    </div><!--/.row-->
+    <form action="/admin/products/updateProduct/<%= editproduct._id %>" role="form" method="post" enctype="multipart/form-data">
+        
+        <div class="col-md-6">
+            
+            <div class="form-group">
+                <label for="">Tên sản phẩm</label>
+              
+                <input class="form-control"  name="name" type="text"
+                autofocus="" required value="<%= editproduct.name %>"/>
+              
+            </div>
+            <div class="form-group">
+                <label for="">Giá sản phẩm</label>
+                <input class="form-control" required name="price" type="number"
+                autofocus="" required value="<%= editproduct.price %>"/>
+            </div>
+            <div class="form-group">
+                <label for="">Bảo hành</label>
+                <input class="form-control"  required name="warranty" type="text"
+                autofocus="" required value="<%= editproduct.warranty %> "/>
+            </div>
+            <div class="form-group">
+                <label for="">Phụ kiện</label>
+                <input class="form-control" required name="accessories" type="text"
+                autofocus="" required value="<%= editproduct.accessories %>"/>
+            </div>
+            <div class="form-group">
+                <label for="">Khuyến mãi</label>
+                <input class="form-control"  required name="promotion" type="text"
+                autofocus="" required value="<%= editproduct.promotion %>"/>
+            </div>
+            <div class="form-group">
+                <label for="">Tình trạng</label>
+                <input class="form-control" required name="status" type="text"
+                autofocus="" required value="<%= editproduct.status %>"/>
+            </div>
+      
+        </div>
+        <div class="col-md-6">
+           
+            <div class="form-group">
+                <label for="">Ảnh sản phẩm</label>
+                <input  required name="thumbnail" type="file"
+                autofocus="" />
+                <div>
+                    <img style="width: 180px;" src="../images/<%= editproduct.thumbnail %>" alt="">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="">Danh mục</label>
+                <select name="cat_id" id="" class="form-control">
+                    <% for (category of categories){ %>
+                    <option <%= editproduct.cat_id == category.id && "selected" %> value=<%= category._id %> > <%= category.title %></option>
+                    <% } %>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="">Trạng thái</label>
+               <select name="is_stock" id="" class="form-control">
+                    <option <%= editproduct.is_stock == 1 && "selected" %> value=1 selected> Còn hàng</option>
+                    <option  <%= editproduct.is_stock == 0 && "selected" %> value=0 > Hết hàng</option>
+               </select>
+            </div>
+            <div class="form-group">
+                <label for="">Sản phẩm nổi bật</label>
+                <div class="checkbox">
+                    <label ><input <%= editproduct.featured == 1 && "checked" %> required name="featured" type="checkbox"
+                        autofocus="" value=1/> Nổi bật</label>
+                </div>
+                
+            </div>
+            <div class="form-group">
+                <label for="">Mô tả sản phẩm</label>
+                <textarea class="form-control" required name="description" id="" cols="30" rows="3"  ><%= editproduct.description %></textarea>
+            </div>
+          
+            <button name="sbm" type="submit" class="btn btn-success">Sửa</button>
+            <a name="" id="" class="btn btn-success" href="/admin/products" role="button">Quay lại</a>
+        </div>
+        
+    </form>
+</div>
+
+
+<%- include('../layout/footer.ejs') %>

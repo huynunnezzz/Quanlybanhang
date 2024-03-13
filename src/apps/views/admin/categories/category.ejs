@@ -1,0 +1,87 @@
+<%- include('../layout/head.ejs',{title:"Category"}) %>
+<%- include('../layout/header.ejs',{account:"Admin"}) %>
+<%- include('../layout/sidebar.ejs') %>
+
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="#"><svg class="glyph stroked home">
+                        <use xlink:href="#stroked-home"></use>
+                    </svg></a></li>
+            <li class="active">Quản lý danh mục</li>
+        </ol>
+    </div><!--/.row-->
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Quản lý danh mục</h1>
+        </div>
+    </div><!--/.row-->
+    
+    <div class="row">
+      <div class="col-md-6 col-md-2">
+        <a name="" id="" class="btn btn-primary form-control" href="/admin/categories/create" role="button" style="margin-bottom: 10px;">+ Thêm danh mục</a>
+      </div>
+      <div class="col-md-6 col-md-4">
+        <label for="search">Tìm kiếm</label>
+        <input class="form-control" style="margin-bottom: 10px;" placeholder="search" name="search" type="text" value="" />
+      </div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Loại sản phẩm</th>
+                <th>Mô tả</th>
+                <th>Chức năng</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <% categories.forEach(function(item,i=0){ %>
+            <tr>
+                <td scope="row"><%= i+1 %></td>
+                <td><%= item.title %></td>
+                <td><%= item.description %></td>
+                <td><a name="" id="" class="btn btn-success" href="/admin/categories/edit/<%= item._id %>" role="button">Edit</a> 
+                    <a name="" id="" class="btn btn-danger" href="/admin/categories/del/<%= item._id %>" role="button">Delete</a></td>
+            </tr>
+            <%})%>
+           
+        </tbody>
+    </table>
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+          <% if(hasPrev){ %>
+            <li class="page-item">
+              <a class="page-link" href="/admin/categories?page=<%=prev%>" aria-label="Previous">
+                <span>&laquo;</span>
+                <span class="sr-only">Previous</span>
+              </a>
+            </li>
+          <% } %>
+          
+          <% for(i of pages){ %>
+              <li class="page-item">
+                <a class="page-link" href="/admin/categories?page=<%=i%>">
+                  <%= i %>
+                </a>
+              </li>
+          <% } %>
+
+          <% if(hasNext){ %>
+            <li class="page-item">
+              <a class="page-link" href="/admin/categories?page=<%=next%>" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+              </a>
+            </li>
+          <% } %>
+        </ul>
+      </nav>
+</div>
+
+
+
+
+<%- include('../layout/footer.ejs') %>
